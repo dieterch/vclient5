@@ -46,16 +46,30 @@
             </div>
         </div-->
         <div *ngIf="currentAufnahme" class="panel panel-default">
-            <div class="panel-heading">
+            <!-- div class="panel-heading">
                 <h3 class="panel-title">{{ currentAufnahme.event_title }}</h3>
             </div>
             <div class="panel-body">
                 <p>{{ currentAufnahme.event_description }}</p>
-                <hr/>
-                <pre>
+                <hr/-->
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object" src="{{ currentAufnahme.imageurl }}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ currentAufnahme.event_title }}</h4>
+                    {{ currentAufnahme.event_description }}
+                </div>
+            </div>
+            <hr>
+            <a href="{{ currentAufnahme.streamurl }}">{{ currentAufnahme.name}}</a>
+            <hr>
+            <pre>
                     {{ currentAufnahme | json }}
                 </pre>
-                <!--spinner [visible]="commentsLoading"></spinner>
+            <!--spinner [visible]="commentsLoading"></spinner>
                 <div class="media" *ngFor="let comment of currentPost.comments">
                     <div class="media-left">
                         <a href="#">
@@ -69,6 +83,6 @@
                         {{ comment.body }}
                     </div>
                 </div-->
-            </div>
         </div>
     </div>
+</div>
