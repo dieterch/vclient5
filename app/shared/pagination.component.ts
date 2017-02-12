@@ -25,7 +25,7 @@ import { OnChanges } from '@angular/core';
             </li-->
 
 			<li> 
-				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }}</a> 
+				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
 			</li>
 
             <li [class.disabled]="currentPage == pages.length">

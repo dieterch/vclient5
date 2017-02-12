@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AufnahmeService }   from './aufnahme.service';
-
 import * as _ from 'underscore'; 
 
 @Component({
@@ -26,16 +24,18 @@ export class AufnahmenComponent implements OnInit {
     pageSize = 10;
     
     constructor(
-        private _aufnahmeService: AufnahmeService) {
+        private _aufnahmeService: AufnahmeService) { 
+          
 	}
 
 	ngOnInit() {
         this.loadAufnahmen();        
 	}
     
-    private loadAufnahmen(){
+    private loadAufnahmen(filter?){
         this.aufnahmenLoading = true;
-        this._aufnahmeService.getAufnahmen()
+        // console.log(filter);
+        this._aufnahmeService.getAufnahmen(filter)
             .subscribe(
                 aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;
@@ -45,8 +45,13 @@ export class AufnahmenComponent implements OnInit {
                 null,
                 () => { this.aufnahmenLoading = false; });
     }
-    
-    select2(aufnahme){
+
+    reloadAufnahmen(filter){
+        this.currentAufnahme = null;
+        this.loadAufnahmen(filter);
+    }
+
+    select(aufnahme){
 		this.currentAufnahme = aufnahme; 
     } 
 

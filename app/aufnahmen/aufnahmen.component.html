@@ -7,17 +7,28 @@
                 {{ user.name }}
             </option>
         </select-->
+        <div class="col-md-6">
+            <select class="form-control" (change)="reloadPosts({ userId: u.value })" #u>
+                <option value="">Select a category ...</option>
+                <option *ngFor="let user of users" value="{{ user.id }}">
+                    {{ user.name }}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <input id="search" type="text" class="form-control" (change)="reloadAufnahmen(u.value)" #u>
+        </div>
         <spinner [visible]="aufnahmenLoading"></spinner>
         <pagination [items]="aufnahmen" (page-changed)="onPageChanged($event)"></pagination>
         <ul class="list-group aufnahmen">
-            <li *ngFor="let aufnahme of pagedAufnahmen" class="list-group-item" [class.active]="currentAufnahme == aufnahme" (click)="select2(aufnahme)">
+            <li *ngFor="let aufnahme of pagedAufnahmen" class="list-group-item" [class.active]="currentAufnahme == aufnahme" (click)="select(aufnahme)">
                 {{ aufnahme.event_title }}
             </li>
         </ul>
 
     </div>
     <div class="col-md-6">
-        <div *ngIf="currentAufnahme" class="panel panel-default">
+        <div *ngIf="currentAufnahme" class="panel panel-default" border-style="none">
             <!-- div class="panel-heading">
                 <h3 class="panel-title">{{ currentAufnahme.event_title }}</h3>
             </div>
@@ -35,8 +46,9 @@
                     {{ currentAufnahme.event_description }}
                 </div>
             </div>
-            <hr>
-            <a class="btn btn-info" role="button" [href]="currentAufnahme.streamurl">Stream</a>
+            <br>
+            <a class="btn btn-info" role="button" [href]="currentAufnahme.streamurl">IOS Stream</a>
+            <a class="btn btn-info" role="button" [href]="currentAufnahme.openvlc">Open VLC</a>
             <hr>
             <pre>
                     {{ currentAufnahme | json }}
