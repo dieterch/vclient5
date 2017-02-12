@@ -11,11 +11,12 @@ import { OnChanges } from '@angular/core';
     <nav *ngIf="items.length > pageSize">
         <ul class="pagination">
             <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - 10) > 1 ? (currentPage - 10) : 1) ">
-                <span aria-hidden="true">&laquo;</span>
+                <!--span aria-hidden="true">&laquo;</span-->
+				<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
             </li>
 			<li [class.disabled]="currentPage == 1">
                 <a (click)="previous()" aria-label="Previous">
-                <span aria-hidden="true"><</span>
+				<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
                 </a>
             </li>
 
@@ -24,16 +25,16 @@ import { OnChanges } from '@angular/core';
             </li-->
 
 			<li> 
-				<a>{{ currentPage }} - {{ currentPage + this.pageSize }}</a> 
+				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }}</a> 
 			</li>
 
             <li [class.disabled]="currentPage == pages.length">
                 <a (click)="next()" aria-label="Next">
-                <span aria-hidden="true">></span>
+				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                 </a>
             </li>
             <li [class.disabled]="currentPage == pages.length" (click)="changePage((currentPage + 10) < pages.length ? (currentPage + 10) : pages.length)">
-                <span aria-hidden="true">&raquo;</span>
+				<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
             </li>
         </ul>
     </nav>  

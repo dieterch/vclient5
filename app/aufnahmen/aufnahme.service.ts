@@ -6,14 +6,13 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AufnahmeService {
-	private _url = "http://jsonplaceholder.typicode.com/posts";
-	private _url1 = "http://192.168.11.8:8002/recordings.json?start=0&limit=0";
+	private _url = "http://192.168.11.8:8002/recordings.json?start=0&limit=0";
 
 	constructor(private _http: Http, private sanitizer: DomSanitizationService) {
 	}
 
 	getAufnahmen() {
-		var url = this._url1;
+		var url = this._url;
 		// console.log(this._http.get(url))
 		return this._http.get(url)
 			.map(res => {
@@ -41,6 +40,7 @@ export class AufnahmeService {
 			});
 	}
 
+/*
 	getPosts(filter?) {
         var url = this._url;
         
@@ -55,4 +55,5 @@ export class AufnahmeService {
 		return this._http.get(this._url + "/" + postId + "/comments")
 			.map(res => res.json());
 	}
+*/
 }
