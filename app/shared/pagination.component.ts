@@ -10,18 +10,30 @@ import { OnChanges } from '@angular/core';
     template: `
     <nav *ngIf="items.length > pageSize">
         <ul class="pagination">
-            <li [class.disabled]="currentPage == 1">
-                <a (click)="previous()" aria-label="Previous">
+            <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - 10) > 1 ? (currentPage - 10) : 1) ">
                 <span aria-hidden="true">&laquo;</span>
+            </li>
+			<li [class.disabled]="currentPage == 1">
+                <a (click)="previous()" aria-label="Previous">
+                <span aria-hidden="true"><</span>
                 </a>
             </li>
-            <li [class.active]="currentPage == page" *ngFor="let page of pages" (click)="changePage(page)">
+
+            <!--li [class.active]="currentPage == page" *ngFor="let page of pages" (click)="changePage(page)">
                 <a>{{ page }}</a>
-            </li>
+            </li-->
+
+			<li> 
+				<a>{{ currentPage }} - {{ currentPage + this.pageSize }}</a> 
+			</li>
+
             <li [class.disabled]="currentPage == pages.length">
                 <a (click)="next()" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true">></span>
                 </a>
+            </li>
+            <li [class.disabled]="currentPage == pages.length" (click)="changePage((currentPage + 10) < pages.length ? (currentPage + 10) : pages.length)">
+                <span aria-hidden="true">&raquo;</span>
             </li>
         </ul>
     </nav>  

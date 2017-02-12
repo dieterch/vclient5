@@ -24,6 +24,7 @@ import * as _ from 'underscore';
 export class AufnahmenComponent implements OnInit {
     aufnahmen = [];
     aufnahmenLoading;
+    pagedAufnahmen = [];
     currentAufnahme;
 
 	posts = [];
@@ -72,6 +73,7 @@ export class AufnahmenComponent implements OnInit {
                 aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;
                     // console.log(this.aufnahmen)
+                    this.pagedAufnahmen = _.take(this.aufnahmen, this.pageSize);
                 },
                 null,
                 () => { this.aufnahmenLoading = false; });
@@ -103,5 +105,6 @@ export class AufnahmenComponent implements OnInit {
 	onPageChanged(page) {
         var startIndex = (page - 1) * this.pageSize;
         this.pagedPosts = _.take(_.rest(this.posts, startIndex), this.pageSize);
+        this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);
 	}
 }
