@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AufnahmeService implements OnInit {
 	private _url = "http://192.168.11.8:8002";
+	private _categories = [];
 
 	constructor(private _http: Http, private sanitizer: DomSanitizationService) {
 	}
@@ -39,6 +40,7 @@ export class AufnahmeService implements OnInit {
 					return 0;
 				})
 
+				this._categories = [];
 				// Felder ändern/ergänzen
 				myres.recordings.forEach(aufnahme => {
 					aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";

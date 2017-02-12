@@ -7,25 +7,30 @@
                 {{ user.name }}
             </option>
         </select-->
-        <div class="col-md-6">
-            <select class="form-control" (change)="reloadPosts({ userId: u.value })" #u>
+        <div>
+            <select class="form-control" (change)="reloadAufnahmen(u.value)" #u>
                 <option value="">Select a category ...</option>
-                <option *ngFor="let user of users" value="{{ user.id }}">
+                <!-- option *ngFor="let user of users" value="{{ user.id }}">
                     {{ user.name }}
-                </option>
+                </option-->
+                <option value="Archiv">Archiv</option>
+                <option value="">Select a category ...</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <hr>
+        <div>
             <input id="search" type="text" class="form-control" (change)="reloadAufnahmen(u.value)" #u>
         </div>
-        <spinner [visible]="aufnahmenLoading"></spinner>
-        <pagination [items]="aufnahmen" (page-changed)="onPageChanged($event)"></pagination>
-        <ul class="list-group aufnahmen">
-            <li *ngFor="let aufnahme of pagedAufnahmen" class="list-group-item" [class.active]="currentAufnahme == aufnahme" (click)="select(aufnahme)">
-                {{ aufnahme.event_title }}
-            </li>
-        </ul>
 
+        <spinner [visible]="aufnahmenLoading"></spinner>
+        <div>
+            <pagination [items]="aufnahmen" (page-changed)="onPageChanged($event)"></pagination>
+            <ul class="list-group aufnahmen">
+                <li *ngFor="let aufnahme of pagedAufnahmen" class="list-group-item" [class.active]="currentAufnahme == aufnahme" (click)="select(aufnahme)">
+                    {{ aufnahme.event_title }}
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="col-md-6">
         <div *ngIf="currentAufnahme" class="panel panel-default" border-style="none">

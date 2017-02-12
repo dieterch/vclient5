@@ -28,18 +28,20 @@ import { OnChanges } from '@angular/core';
 				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
 			</li>
 
-            <li [class.disabled]="currentPage == pages.length">
+            <li [class.disabled]="currentPage == pages.length + 1">
                 <a (click)="next()" aria-label="Next">
 				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                 </a>
             </li>
-            <li [class.disabled]="currentPage == pages.length" (click)="changePage((currentPage + 10) < pages.length ? (currentPage + 10) : pages.length)">
+            <li [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + 10) < pages.length ? (currentPage + 10) : pages.length)">
 				<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
             </li>
         </ul>
     </nav>  
 `
 })
+
+
 export class PaginationComponent implements OnChanges {
     @Input() items = [];
 	@Input('page-size') pageSize = 10;
@@ -70,7 +72,7 @@ export class PaginationComponent implements OnChanges {
 	}
 
 	next(){
-		if (this.currentPage == this.pages.length)
+		if (this.currentPage == (this.pages.length + 1))
 			return; 
 		
 		this.currentPage++;
