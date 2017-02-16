@@ -22,6 +22,9 @@ export class AufnahmenComponent implements OnInit {
     pagedAufnahmen = [];
     currentAufnahme;
     pageSize = 10;
+    categories = [];
+    private _filter = null;
+    private _category = null;
     
     constructor(
         private _aufnahmeService: AufnahmeService) { 
@@ -29,13 +32,14 @@ export class AufnahmenComponent implements OnInit {
 	}
 
 	ngOnInit() {
-        this.loadAufnahmen();        
+        this.loadAufnahmen();
+        this.loadCategories();        
 	}
     
-    private loadAufnahmen(filter?){
+    private loadAufnahmen(filter?, category?){
         this.aufnahmenLoading = true;
-        // console.log(filter);
-        this._aufnahmeService.getAufnahmen(filter)
+        console.log(filter, category);
+        this._aufnahmeService.getAufnahmen(filter, category)
             .subscribe(
                 aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;
@@ -46,10 +50,27 @@ export class AufnahmenComponent implements OnInit {
                 () => { this.aufnahmenLoading = false; });
     }
 
-    reloadAufnahmen(filter){
+    reloadAufnahmen(){
         this.currentAufnahme = null;
-        this.loadAufnahmen(filter);
+        this.loadAufnahmen(this._filter, this._category);
     }
+
+    reloadAufnahmenFilter(filter){
+        this._filter = filter;
+        this.reloadAufnahmen();
+    }
+
+    reloadAufnahmenCategory(category){
+        this._category = category;
+        this.reloadAufnahmen();
+    }
+
+    loadCategories() {
+        this._aufnahmeService.getCategories()
+            .subscribe(cats => {
+                this.categories = cats;
+            });
+	}
 
     select(aufnahme){
 		this.currentAufnahme = aufnahme; 

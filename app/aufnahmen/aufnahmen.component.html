@@ -1,25 +1,17 @@
 <!--h1>Aufnahmen</h1-->
 <div class="row">
     <div class="col-md-6">
-        <!--select class="form-control" (change)="reloadPosts({ userId: u.value })" #u>
-            <option value="">Select a user...</option>
-            <option *ngFor="let user of users" value="{{ user.id }}">
-                {{ user.name }}
-            </option>
-        </select-->
         <div>
-            <select class="form-control" (change)="reloadAufnahmen(u.value)" #u>
+            <select class="form-control" (change)="reloadAufnahmenCategory(c.value)" (click)="loadCategories()" #c>
                 <option value="">Select a category ...</option>
-                <!-- option *ngFor="let user of users" value="{{ user.id }}">
-                    {{ user.name }}
-                </option-->
-                <option value="Archiv">Archiv</option>
-                <option value="">Select a category ...</option>
+                <option *ngFor="let cat of categories" value="{{ cat }}">
+                    {{ cat }}
+                </option>
             </select>
         </div>
         <hr>
         <div>
-            <input id="search" type="text" class="form-control" (change)="reloadAufnahmen(u.value)" #u>
+            <input id="search" type="text" class="form-control" (change)="reloadAufnahmenFilter(u.value)" #u>
         </div>
 
         <spinner [visible]="aufnahmenLoading"></spinner>
