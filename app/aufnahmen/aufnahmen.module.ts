@@ -6,6 +6,7 @@ import { HttpModule }          from '@angular/http';
 import { SharedModule }        from '../shared/shared.module';
 
 import { AufnahmenComponent }     from './aufnahmen.component';
+import { AufnahmeComponent }     from './aufnahme.component';
 import { AufnahmeService }     from './aufnahme.service';
 import { UserService }         from '../users/user.service';
 
@@ -16,7 +17,8 @@ import { UserService }         from '../users/user.service';
         HttpModule
     ],
     declarations: [
-        AufnahmenComponent 
+        AufnahmenComponent,
+        AufnahmeComponent 
     ],
     exports: [
         AufnahmenComponent 

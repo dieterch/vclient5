@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http } 	  from '@angular/http';
-import {DomSanitizationService} from '@angular/platform-browser';
+import { DomSanitizationService } from '@angular/platform-browser';
 
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';

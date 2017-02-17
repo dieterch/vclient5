@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AufnahmeService }   from './aufnahme.service';
+import { AufnahmeComponent}  from './aufnahme.component';
 import * as _ from 'underscore'; 
 
 @Component({
@@ -21,7 +22,7 @@ export class AufnahmenComponent implements OnInit {
     aufnahmenLoading;
     pagedAufnahmen = [];
     currentAufnahme;
-    pageSize = 10;
+    pageSize = 5;
     categories = [];
     private _filter = null;
     private _category = null;
@@ -38,7 +39,7 @@ export class AufnahmenComponent implements OnInit {
     
     private loadAufnahmen(filter?, category?){
         this.aufnahmenLoading = true;
-        console.log(filter, category);
+        //console.log(filter, category);
         this._aufnahmeService.getAufnahmen(filter, category)
             .subscribe(
                 aufnahmen => {

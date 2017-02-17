@@ -10,7 +10,7 @@ import { OnChanges } from '@angular/core';
     template: `
     <nav *ngIf="items.length > pageSize">
         <ul class="pagination">
-            <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - 10) > 1 ? (currentPage - 10) : 1) ">
+            <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
                 <!--span aria-hidden="true">&laquo;</span-->
 				<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
             </li>
@@ -33,7 +33,7 @@ import { OnChanges } from '@angular/core';
 				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                 </a>
             </li>
-            <li [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + 10) < pages.length ? (currentPage + 10) : pages.length)">
+            <li [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
 				<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
             </li>
         </ul>
@@ -44,7 +44,7 @@ import { OnChanges } from '@angular/core';
 
 export class PaginationComponent implements OnChanges {
     @Input() items = [];
-	@Input('page-size') pageSize = 10;
+	@Input('page-size') pageSize = 5;
 	@Output('page-changed') pageChanged = new EventEmitter();
 	pages: any[];
 	currentPage; 
