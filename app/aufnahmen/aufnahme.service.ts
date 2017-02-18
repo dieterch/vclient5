@@ -85,6 +85,8 @@ export class AufnahmeService implements OnInit {
 					aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";
 					aufnahme.streamurl = this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=http://192.168.11.8:3000/" + aufnahme.inode + ".rec");
 					aufnahme.openvlc = this.sanitizer.bypassSecurityTrustUrl("http://192.168.11.8:5100/playpc/" + aufnahme.number);
+					//aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play/" + encodeURIComponent(aufnahme.file_name));
+					aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play" + aufnahme.file_name);
 				});
 
 				return myres

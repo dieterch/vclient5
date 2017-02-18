@@ -8,7 +8,7 @@ import {
 	selector: 'recording',
     template: `
     <div class="media-left">
-      <a href="#">
+      <a [href]="myrecord.streamurl">
         <img class="media-object smallposter" src="{{ myrecord.imageurl }}" alt="...">
       </a>
     </div>
