@@ -1,14 +1,15 @@
 
-import { NgModule }            from '@angular/core';
-import { CommonModule }        from '@angular/common';
-import { HttpModule }          from '@angular/http';
+import { NgModule }             from '@angular/core';
+import { CommonModule }         from '@angular/common';
+import { HttpModule }           from '@angular/http';
 
-import { SharedModule }        from '../shared/shared.module';
+import { SharedModule }         from '../shared/shared.module';
 
-import { AufnahmenComponent }     from './aufnahmen.component';
-import { AufnahmeComponent }     from './aufnahme.component';
-import { AufnahmeService }     from './aufnahme.service';
-import { UserService }         from '../users/user.service';
+import { AufnahmenComponent }   from './aufnahmen.component';
+import { AufnahmeComponent }    from './aufnahme.component';
+// import { AufnahmeService }     from './aufnahme.service';
+import { VdrService }           from '../shared/vdr.service';
+import { UserService }          from '../users/user.service';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { UserService }         from '../users/user.service';
         AufnahmenComponent 
     ],
     providers: [
-        AufnahmeService,
+//        AufnahmeService,
+        VdrService,
         UserService
     ]
 })

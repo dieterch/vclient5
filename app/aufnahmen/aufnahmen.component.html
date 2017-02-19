@@ -24,7 +24,7 @@
             <pagination [items]="aufnahmen" (page-changed)="onPageChanged($event)"></pagination>
             <ul class="media-list aufnahmen">
                 <li *ngFor="let aufnahme of pagedAufnahmen" class="media" [class.active]="currentAufnahme == aufnahme" (click)="select(aufnahme)">
-                    <recording [myrecord]=aufnahme></recording>
+                    <recording [myrecord]=aufnahme [myImage]="getImageUrl(aufnahme)"></recording>
                 </li>
             </ul>
         </div>
@@ -40,7 +40,7 @@
             <div class="media">
                 <div class="media-left media-top">
                     <a href="#">
-                        <img class="media-object poster" src="{{ currentAufnahme.imageurl }}" alt="...">
+                        <img class="media-object poster" src="{{ getImageUrl(currentAufnahme) }}" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
@@ -49,9 +49,8 @@
                 </div>
             </div>
             <br>
-            <a class="btn btn-info" role="button" [href]="currentAufnahme.streamurl">IOS Stream</a>
-            <a class="btn btn-info" role="button" [href]="currentAufnahme.openvlc">Open VLC</a>
-            <a class="btn btn-info" role="button" [href]="currentAufnahme.startonTv">Start</a>
+            <a class="btn btn-primary" role="button" [href]="streamtourl(currentAufnahme)">Stream</a>
+            <button type=" button " class="btn btn-primary " (click)="playonTV(currentAufnahme)">Start on TV</button>
             <hr>
             <pre>
                     {{ currentAufnahme | json }}

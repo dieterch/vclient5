@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 
 @Injectable()
-export class AufnahmeService implements OnInit {
+export class VdrService implements OnInit {
 	private _vdrurl = "http://192.168.11.8";
 	private _resturl = this._vdrurl + ":8002";
 	private _pyresturl = this._vdrurl + ":5100"; 
@@ -17,16 +17,26 @@ export class AufnahmeService implements OnInit {
 	ngOnInit() {
 	}
 
-	getCategories() {
+    isMobile(): boolean {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+    }
+
+// --------- Recordings Start -------------
+
+	getRecordingsCategories() {
 		var url = this._resturl + "/recordings.json?start=0&limit=0";
 		return this._http.get(url)
 			.map(res => {
 				var myres = res.json();
 				var _cat = [];
+
+                // aus allen Recordings die Kategorien (= Unterverzeichnisse) extrahieren
 				myres.recordings.forEach(rec => {
 					_cat = _.union(_cat, rec.name.split('~').slice(0,-1));
 					// console.log(rec.name, _cat)
 				});
+                
+                // nach Namen sortieren
 				return _cat.sort((n1,n2) => {
 					if (n1 > n2) {
 						return 1;
@@ -40,7 +50,7 @@ export class AufnahmeService implements OnInit {
 		);
 	}
 
-	getAufnahmen(filter?, category?) {
+	getRecordings(filter?, category?) {
 		var url = this._resturl + "/recordings.json?start=0&limit=0";
 		// console.log(this._http.get(url))
 		return this._http.get(url)
@@ -70,7 +80,7 @@ export class AufnahmeService implements OnInit {
 					return 0;
 				})
 
-				/*/ Sortieren Absteigend nach Datum
+				/* // Sortieren Absteigend nach Datum
 				myres.recordings.sort((n1,n2) => {
 					if (n1.event_start_time > n2.event_start_time) {
 						return 1;
@@ -79,10 +89,10 @@ export class AufnahmeService implements OnInit {
 						return -1;
 					}
 					return 0;
-				}) */
+				})
 
 
-				/*/ Felder ändern/ergänzen
+				// Felder ändern/ergänzen
 				myres.recordings.forEach(aufnahme => {
 					// aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";
 					// aufnahme.streamurl = this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=http://192.168.11.8:3000/" + aufnahme.inode + ".rec");
@@ -94,12 +104,11 @@ export class AufnahmeService implements OnInit {
 				return myres
 			});
 	}
-	
-    isMobile(): boolean {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
-    }
+// --------- Recordings End -------------
 
-	getImageUrl(rec?) {
+// ---------- Record Start --------------	
+
+	getRecordImageUrl(rec?) {
 		if (rec) {
 			return this._pyresturl + "/images/" + rec.event_title + ".jpg";
 		}
@@ -112,21 +121,20 @@ export class AufnahmeService implements OnInit {
 		}
     }
 
-	streamtolink(rec?) {
+	streamRecordUrl(rec?) {
 		if (rec) {
-			return this.isMobile() ? this.streamtoIOSlink(rec) : this.streamtoPClink(rec); 
+            var _lurl;
+			if (this.isMobile()) {
+                _lurl = "vlc-x-callback://x-callback-url/stream?url=" + this._vdrurl + ":3000/" + rec.inode + ".rec";
+            }  else {
+                _lurl = this._pyresturl + "/playpc/" + rec.number;
+            }
+            return this.sanitizer.bypassSecurityTrustUrl(_lurl);
 		}
 	}
 
-	streamtoPClink(rec?) {
-		if (rec) {
-			return this.sanitizer.bypassSecurityTrustUrl(this._pyresturl + "/playpc/" + rec.number);
-		}
-	}
+// ---------- Record End --------------	
 
-	streamtoIOSlink(rec?) {
-		if (rec) {
-			return this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=" + this._vdrurl + ":3000/" + rec.inode + ".rec");
-		}
-	}
+
+
 }

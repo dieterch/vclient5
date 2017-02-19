@@ -5,6 +5,8 @@ import { CommonModule }        from '@angular/common';
 import { PaginationComponent } from './pagination.component';
 import { SpinnerComponent }    from './spinner.component';
 
+import { VdrService }     from './vdr.service';
+
 @NgModule({
     imports: [
         CommonModule
@@ -16,6 +18,9 @@ import { SpinnerComponent }    from './spinner.component';
     exports: [
         PaginationComponent, 
         SpinnerComponent
+    ],
+    providers: [
+        VdrService
     ]
 })
 export class SharedModule { 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AufnahmeService }   from './aufnahme.service';
+import { VdrService }   from '../shared/vdr.service';
 import { AufnahmeComponent}  from './aufnahme.component';
 import * as _ from 'underscore'; 
 
@@ -28,7 +28,7 @@ export class AufnahmenComponent implements OnInit {
     private _category = null;
     
     constructor(
-        private _aufnahmeService: AufnahmeService) { 
+        private _vdrService: VdrService) { 
           
 	}
 
@@ -40,7 +40,7 @@ export class AufnahmenComponent implements OnInit {
     private loadAufnahmen(filter?, category?){
         this.aufnahmenLoading = true;
         //console.log(filter, category);
-        this._aufnahmeService.getAufnahmen(filter, category)
+        this._vdrService.getRecordings(filter, category)
             .subscribe(
                 aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;
@@ -67,7 +67,7 @@ export class AufnahmenComponent implements OnInit {
     }
 
     loadCategories() {
-        this._aufnahmeService.getCategories()
+        this._vdrService.getRecordingsCategories()
             .subscribe(cats => {
                 this.categories = cats;
             });
@@ -75,7 +75,20 @@ export class AufnahmenComponent implements OnInit {
 
     select(aufnahme){
 		this.currentAufnahme = aufnahme; 
-    } 
+    }
+
+    getImageUrl(aufnahme) {
+       return this._vdrService.getRecordImageUrl(aufnahme);
+    }
+
+    playonTV(aufnahme){
+        this._vdrService.playRecordonTV(aufnahme)
+           .subscribe();
+    }
+
+    streamtourl(aufnahme){
+        return this._vdrService.streamRecordUrl(aufnahme)
+    }
 
 	onPageChanged(page) {
         var startIndex = (page - 1) * this.pageSize;

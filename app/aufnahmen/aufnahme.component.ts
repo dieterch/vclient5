@@ -1,15 +1,12 @@
-import { 
-	Component,
-	Input, 
-	Output, 
-	EventEmitter }   from '@angular/core';
+import { Component, Input, Output, EventEmitter }   from '@angular/core';
+import { VdrService }   from '../shared/vdr.service';
 
 @Component({
 	selector: 'recording',
     template: `
     <div class="media-left">
       <a [href]="myrecord.streamurl">
-        <img class="media-object smallposter" src="{{ myrecord.imageurl }}" alt="...">
+        <img class="media-object smallposter" src="{{ myImage }}" alt="...">
       </a>
     </div>
     <div class="media-body">
@@ -21,7 +18,12 @@ import {
 
 export class AufnahmeComponent {
     @Input() myrecord;
+    @Input() myImage;
 
+    constructor(
+        private _vdrService: VdrService) {           
+	  }
+    
     toDate(epoch) {
       return new Date( epoch * 1000);
     }
