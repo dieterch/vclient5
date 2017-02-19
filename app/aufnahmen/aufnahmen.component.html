@@ -36,7 +36,7 @@
             </div>
         </div>
         <div>
-            <pagination [items]="aufnahmen " [page-size]="pageSize " (page-changed)="onPageChanged($event) "></pagination>
+            <pagination [items]="aufnahmen " [page-size]="pageSize" (page-changed)="onPageChanged($event) "></pagination>
             <spinner [visible]="aufnahmenLoading "></spinner>
             <ul class="media-list aufnahmen ">
                 <li *ngFor="let aufnahme of pagedAufnahmen " [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme) ">
