@@ -22,14 +22,13 @@ export class AufnahmenComponent implements OnInit {
     aufnahmenLoading;
     pagedAufnahmen = [];
     currentAufnahme;
-    pageSize = 5;
+    pageSize = 30;
     categories = [];
     private _filter = null;
     private _category = null;
     
     constructor(
-        private _vdrService: VdrService) { 
-          
+        private _vdrService: VdrService ) { 
 	}
 
 	ngOnInit() {

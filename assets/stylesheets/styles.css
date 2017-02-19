@@ -2,13 +2,13 @@
     cursor: pointer;
 }
 
-.thumbnail {
-    border-radius: 100%;
-}
-
 .poster {
     width: 160px;
-    margin: 0 -20px 0 -20px;
+    margin: 20px -10px 10px -10px;
+}
+
+.caption {
+    height: 100px;
 }
 
 .smallposter {
@@ -20,5 +20,10 @@
 }
 
 .panel {
+    /* background-color: gainsboro; */
     border: none;
+}
+
+.pagination {
+    margin-top: -10px;
 }

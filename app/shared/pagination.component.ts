@@ -8,10 +8,9 @@ import { OnChanges } from '@angular/core';
 @Component({
 	selector: 'pagination',
     template: `
-    <nav *ngIf="items.length > pageSize">
+    <div *ngIf="items.length > pageSize">
         <ul class="pagination">
             <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
-                <!--span aria-hidden="true">&laquo;</span-->
 				<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
             </li>
 			<li [class.disabled]="currentPage == 1">
@@ -19,15 +18,9 @@ import { OnChanges } from '@angular/core';
 				<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
                 </a>
             </li>
-
-            <!--li [class.active]="currentPage == page" *ngFor="let page of pages" (click)="changePage(page)">
-                <a>{{ page }}</a>
-            </li-->
-
 			<li> 
 				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
 			</li>
-
             <li [class.disabled]="currentPage == pages.length + 1">
                 <a (click)="next()" aria-label="Next">
 				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
@@ -37,7 +30,7 @@ import { OnChanges } from '@angular/core';
 				<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
             </li>
         </ul>
-    </nav>  
+    </div>  
 `
 })
 

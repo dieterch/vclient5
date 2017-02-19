@@ -114,6 +114,10 @@ export class VdrService implements OnInit {
 		}
 	}
 
+	getAltImageUrl() {
+		return this._pyresturl + "/images/404-page-not-found-image.jpg";
+	}
+
 	playRecordonTV(rec?) {
 		if (rec) {
 			var _lurl = this._resturl + "/recordings/play" + rec.file_name;
