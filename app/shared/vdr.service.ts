@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http } 	  from '@angular/http';
+import { HTTP_PROVIDERS, Http, Request, RequestMethod } from '@angular/http';
 import { DomSanitizationService } from '@angular/platform-browser';
 
 import 'rxjs/add/operator/map';
@@ -10,6 +10,48 @@ export class VdrService implements OnInit {
 	private _vdrurl = "http://192.168.11.8";
 	private _resturl = this._vdrurl + ":8002";
 	private _pyresturl = this._vdrurl + ":5100"; 
+    private _keys = {
+         "Up" : this._resturl + "/remote/Up",
+         "Down" : this._resturl + "/remote/Down",
+         "Menu" : this._resturl + "/remote/Menu",
+         "Ok" : this._resturl + "/remote/Ok",
+         "Back" : this._resturl + "/remote/Back",
+         "Left" : this._resturl + "/remote/Left",
+         "Right" : this._resturl + "/remote/Right",
+         "Red" : this._resturl + "/remote/Red",
+         "Green" : this._resturl + "/remote/Green",
+         "Yellow" : this._resturl + "/remote/Yellow",
+         "Blue" : this._resturl + "/remote/Blue",
+         "0" : this._resturl + "/remote/0",
+         "1" : this._resturl + "/remote/1",
+         "2" : this._resturl + "/remote/2",
+         "3" : this._resturl + "/remote/3",
+         "4" : this._resturl + "/remote/4",
+         "5" : this._resturl + "/remote/5",
+         "6" : this._resturl + "/remote/6",
+         "7" : this._resturl + "/remote/7",
+         "8" : this._resturl + "/remote/8",
+         "9" : this._resturl + "/remote/9",
+         "Info" : this._resturl + "/remote/Info",
+         "Play" : this._resturl + "/remote/Play",
+         "Pause" : this._resturl + "/remote/Pause",
+         "Stop" : this._resturl + "/remote/Stop",
+         "Record" : this._resturl + "/remote/Record",
+         "FastFwd" : this._resturl + "/remote/FastFwd",
+         "FastRew" : this._resturl + "/remote/FastRew",
+         "Next" : this._resturl + "/remote/Next",
+         "Prev" : this._resturl + "/remote/Prev",
+         "ChanUp" : this._resturl + "/remote/ChanUp",
+         "ChanDn" : this._resturl + "/remote/ChanDn",
+         "ChanPrev" : this._resturl + "/remote/ChanPrev",
+         "VolUp" : this._resturl + "/remote/VolUp",
+         "VolDn" : this._resturl + "/remote/VolDn",
+         "Mute" : this._resturl + "/remote/Mute",
+         "Audio" : this._resturl + "/remote/Audio",
+         "Recordings" : this._resturl + "/remote/Recordings"
+         /*Subtitles, Schedule, Channels, Timers, Setup, Commands, User0, User1, User2, User3, User4, User5, User6, User7, User8, User9, None, Kbd */
+    }
+
 
 	constructor(private _http: Http, private sanitizer: DomSanitizationService) {
 	}
@@ -118,10 +160,30 @@ export class VdrService implements OnInit {
 		return this._pyresturl + "/images/404-page-not-found-image.jpg";
 	}
 
+	pressKey(key?) {
+        if (key) {
+			var _lurl = this._keys[key];
+			this._http.request(new Request({
+                method: RequestMethod.Post,
+                url: _lurl})).subscribe();
+        }	
+    }
+
 	playRecordonTV(rec?) {
 		if (rec) {
 			var _lurl = this._resturl + "/recordings/play" + rec.file_name;
-			return this._http.request(_lurl);	
+			this._http.request(new Request({
+                method: RequestMethod.Post,
+                url: _lurl})).subscribe();	
+		}
+    }
+
+	playRecordonTVCont(rec?) {
+		if (rec) {
+			var _lurl = this._resturl + "/recordings/play" + rec.file_name;
+			this._http.request(new Request({
+                method: RequestMethod.Get,
+                url: _lurl})).subscribe();	
 		}
     }
 

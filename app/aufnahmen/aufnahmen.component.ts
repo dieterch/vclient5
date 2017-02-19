@@ -76,19 +76,6 @@ export class AufnahmenComponent implements OnInit {
 		this.currentAufnahme = aufnahme; 
     }
 
-    getImageUrl(aufnahme) {
-       return this._vdrService.getRecordImageUrl(aufnahme);
-    }
-
-    playonTV(aufnahme){
-        this._vdrService.playRecordonTV(aufnahme)
-           .subscribe();
-    }
-
-    streamtourl(aufnahme){
-        return this._vdrService.streamRecordUrl(aufnahme)
-    }
-
 	onPageChanged(page) {
         var startIndex = (page - 1) * this.pageSize;
         this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);

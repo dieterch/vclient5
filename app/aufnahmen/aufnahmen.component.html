@@ -13,50 +13,54 @@
                                 {{ cat }}
                             </option>
                     </select>
-
-                    <!--select class="form-control" (change)="reloadAufnahmenCategory(c.value)" (click)="loadCategories()" #c>
-                            <option value="">Kategorie wählen ...</option>
-                            <option *ngFor="let cat of categories" value="{{ cat }}">
-                                {{ cat }}
-                            </option>
-                        </select-->
                 </div>
-                <div class="col-xs-4">
-                    <a class="btn btn-primary" role="button" [href]="streamtourl(currentAufnahme)">
+            </div>
+            <div class="row">
+                <div class="col-xs-4 buttonrow">
+                    <a class="btn btn-primary" role="button" [href]="this._vdrService.streamRecordUrl(currentAufnahme)">
                         <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                     </a>
-                    <a class="btn btn-primary" role="button" (click)="playonTV(currentAufnahme)" aria-hidden="true">
+                    <a class="btn btn-primary" role="button" (click)="this._vdrService.playRecordonTV(currentAufnahme)" aria-hidden="true">
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                     </a>
+                    <a class="btn btn-primary" role="button" (click)="this._vdrService.playRecordonTVCont(currentAufnahme)" aria-hidden="true">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true">.</span>
+                    </a>
+                    <a class="btn btn-primary" role="button" (click)="this._vdrService.pressKey('Stop')" aria-hidden="true ">
+                        <span class="glyphicon glyphicon-stop " aria-hidden="true "></span>
+                    </a>
+                </div>
+                <div *ngIf="currentAufnahme " class="col-md-6 buttonrow ">
+                    <h4>{{ currentAufnahme.event_title }}</h4>
                 </div>
             </div>
         </div>
         <div>
-            <pagination [items]="aufnahmen" [page-size]="pageSize" (page-changed)="onPageChanged($event)"></pagination>
-            <spinner [visible]="aufnahmenLoading"></spinner>
-            <ul class="media-list aufnahmen">
-                <li *ngFor="let aufnahme of pagedAufnahmen" [class.highlighted]="currentAufnahme == aufnahme" (click)="select(aufnahme)">
+            <pagination [items]="aufnahmen " [page-size]="pageSize " (page-changed)="onPageChanged($event) "></pagination>
+            <spinner [visible]="aufnahmenLoading "></spinner>
+            <ul class="media-list aufnahmen ">
+                <li *ngFor="let aufnahme of pagedAufnahmen " [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme) ">
                     <recording [myrecord]=aufnahme></recording>
                 </li>
             </ul>
         </div>
     </div>
-    <!-- div class="col-md-6">
-        <div *ngIf="currentAufnahme" class="panel panel-default" border-style="none">
-            <div class="media">
-                <div class="media-left media-top">
-                    <a href="#">
-                        <img class="media-object poster" src="{{ getImageUrl(currentAufnahme) }}" alt="...">
+    <!-- div class="col-md-6 ">
+        <div *ngIf="currentAufnahme " class="panel panel-default " border-style="none ">
+            <div class="media ">
+                <div class="media-left media-top ">
+                    <a href="# ">
+                        <img class="media-object poster " src="{{ getImageUrl(currentAufnahme) }} " alt="... ">
                     </a>
                 </div>
-                <div class="media-body">
-                    <h3 class="media-heading">{{ currentAufnahme.event_title }}</h3>
+                <div class="media-body ">
+                    <h3 class="media-heading ">{{ currentAufnahme.event_title }}</h3>
                     {{ currentAufnahme.event_description }}
                 </div>
             </div>
             <br>
-            <a class="btn btn-primary" role="button" [href]="streamtourl(currentAufnahme)">Stream</a>
-            <button type=" button " class="btn btn-primary " (click)="playonTV(currentAufnahme)">Start on TV</button >
+            <a class="btn btn-primary " role="button " [href]="streamtourl(currentAufnahme) ">Stream</a>
+            <button type=" button " class="btn btn-primary " (click)="playonTV(currentAufnahme) ">Start on TV</button >
             <hr>
             <pre>
                     {{ currentAufnahme | json }}

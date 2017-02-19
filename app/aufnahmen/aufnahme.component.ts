@@ -6,7 +6,7 @@ import { VdrService }   from '../shared/vdr.service';
       template: `
     <div class="col-sm-3 col-md-2">
       <div class="thumbnail">
-        <img class="poster" src="{{ getRecordImageUrl(myrecord) }}" alt="{{ this._vdrService.getAltImageUrl()}}">
+        <img class="poster" src="{{ this._vdrService.getRecordImageUrl(myrecord) }}" alt="{{ this._vdrService.getAltImageUrl()}}">
         <div class="caption">
             <small><b>{{ myrecord.event_title }}</b></small><br>
             <small>{{ toDate(myrecord.event_start_time) | date:'d.M.yyyy' }}, {{ myrecord.event_duration / 60 | number : '1.0-0' }}'</small>
@@ -45,13 +45,5 @@ export class AufnahmeComponent {
        return this._vdrService.getRecordImageUrl(aufnahme);
     }
 
-    playRecordonTV(aufnahme){
-        this._vdrService.playRecordonTV(aufnahme)
-           .subscribe();
-    }
-
-    streamRecordUrl(aufnahme){
-        return this._vdrService.streamRecordUrl(aufnahme)
-    }
 
 }
