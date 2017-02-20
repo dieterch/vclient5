@@ -2,13 +2,47 @@
     cursor: pointer;
 }
 
-.poster {
-    width: 160px;
-    margin: 20px -10px 10px -10px;
+.thumbnail {
+    background-color: whitesmoke;
+    border-radius: 1px;
+    width: 150px;
+    height: 300px;
+    text-align: center;
+    box-shadow: 1px 1px 1px 1px;
 }
 
-.caption {
-    height: 60px;
+.poster {
+    width: 210px;
+}
+
+.thumbnail span.title {
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.thumbnail span.text {
+    font-size: 65%;
+}
+
+.crop {
+    float: left;
+    margin-left: -4px;
+    margin-top: -4px;
+    margin-bottom: 5px;
+    /* margin: .5em 10px .5em 0;*/
+    overflow: hidden;
+    /* this is important */
+    position: relative;
+    /* this is important too */
+    border: 1px solid #ccc;
+    width: 150px;
+    height: 210px;
+}
+
+.crop img {
+    position: absolute;
+    top: 0px;
+    left: -30px;
 }
 
 .smallposter {
@@ -25,7 +59,8 @@
 }
 
 .pagination {
-    margin-top: -10px;
+    margin-top: 5px;
+    margin-bottom: -15px
 }
 
 .buttonrow {

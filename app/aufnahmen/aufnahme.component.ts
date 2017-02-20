@@ -6,10 +6,18 @@ import { VdrService }   from '../shared/vdr.service';
       template: `
     <div class="col-sm-3 col-md-2">
       <div class="thumbnail">
-        <img class="poster" src="{{ this._vdrService.getRecordImageUrl(myrecord) }}" alt="{{ this._vdrService.getAltImageUrl()}}">
+        <div class="crop">
+          <img class="poster" src="{{ this._vdrService.getRecordImageUrl(myrecord) }}" alt="{{ this._vdrService.getAltImageUrl()}}">
+        </div>
         <div class="caption">
-            <small><b>{{ myrecord.event_title }}</b></small><br>
-            <small>{{ toDate(myrecord.event_start_time) | date:'d.M.yyyy' }}, {{ myrecord.event_duration / 60 | number : '1.0-0' }}'</small>
+            <p>
+              <a role="button" *ngIf="!myrecord.is_pes_recording" [href]="this._vdrService.streamRecordUrl(myrecord)"><span class="fa fa-caret-square-o-right fa-lg"></span></a>
+              <a role="button" (click)="this._vdrService.playRecordonTV(myrecord)"><span class="fa fa-play-circle-o fa-lg"></span></a>
+              <a role="button" (click)="this._vdrService.playRecordonTVCont(myrecord)"><span class="fa fa-play-circle fa-lg"></span></a>
+              <a role="button" (click)="this._vdrService.pressKey('Stop')"><span class="fa fa-stop-circle-o fa-lg"></span></a>
+            </p>
+            <span class="title">{{ myrecord.event_title }}</span><br>
+            <span class="text">{{ toDate(myrecord.event_start_time) | date:'d.M.yyyy' }}, {{ myrecord.event_duration / 60 | number : '1.0-0' }}'</span>
         </div>
       </div>
     </div>  
