@@ -111,7 +111,7 @@ export class VdrService implements OnInit {
 					myres.recordings = myres.recordings.filter( rec => rec.event_title.indexOf(filter) >=0 );
 				}
 
-				// Sortieren nach titel
+				/* Sortieren nach titel
 				myres.recordings.sort((n1,n2) => {
 					if (n1.event_title > n2.event_title) {
 						return 1;
@@ -120,21 +120,13 @@ export class VdrService implements OnInit {
 						return -1;
 					}
 					return 0;
-				})
+				}) */
 
-				/* // Sortieren Absteigend nach Datum
-				myres.recordings.sort((n1,n2) => {
-					if (n1.event_start_time > n2.event_start_time) {
-						return 1;
-					}
-					if (n1.event_start_time < n2.event_start_time) {
-						return -1;
-					}
-					return 0;
-				})
+				// Sortieren Absteigend nach Datum
+				myres.recordings.sort((n1,n2) => { return n2.event_start_time - n1.event_start_time })
 
 
-				// Felder ändern/ergänzen
+				/*/ Felder ändern/ergänzen
 				myres.recordings.forEach(aufnahme => {
 					// aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";
 					// aufnahme.streamurl = this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=http://192.168.11.8:3000/" + aufnahme.inode + ".rec");

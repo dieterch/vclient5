@@ -7,7 +7,7 @@ import { VdrService }   from '../shared/vdr.service';
     <div class="col-sm-3 col-md-2">
       <div class="thumbnail">
         <div class="crop">
-          <img class="poster" src="{{ this._vdrService.getRecordImageUrl(myrecord) }}" alt="{{ this._vdrService.getAltImageUrl()}}">
+          <img class="poster" src="{{ this._vdrService.getRecordImageUrl(myrecord) }}" alt="kein Bild">
         </div>
         <div class="caption">
             <p>
