@@ -1,6 +1,5 @@
 <!--h1>Aufnahmen</h1-->
-<div class="container-fluid">
-    <!--div class="row">
+<!--div class="row">
         <div class="col-md-12">
             <div class="well">
                 <div class="row">
@@ -21,13 +20,11 @@
         </div>
     </div>
     <spinner [visible]="aufnahmenLoading "></spinner-->
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let aufnahme of pagedAufnahmen" [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme)">
-            <recording [myrecord]=aufnahme></recording>
-        </div>
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let aufnahme of pagedAufnahmen" [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme)">
+        <recording [myrecord]=aufnahme></recording>
     </div>
 </div>
-
 <!--<div class="col-md-6 ">
         <div *ngIf="currentAufnahme " class="panel panel-default " border-style="none ">
             <div class="media ">

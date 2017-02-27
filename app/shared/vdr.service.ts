@@ -138,6 +138,19 @@ export class VdrService implements OnInit {
 				return myres
 			});
 	}
+
+	getRecording(Id){
+		return this._http.get(this.getAufnahmeUrl(Id))
+			.map(res => {
+				// respose im json format lesen
+				var myres = res.json();
+				return myres.recordings[0];
+			});
+	}
+
+	private getAufnahmeUrl(Id){
+		return this._resturl + "/recordings.json?start=" + Id + "&limit=1";
+	}
 // --------- Recordings End -------------
 
 // ---------- Record Start --------------	

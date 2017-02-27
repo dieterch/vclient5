@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter }   from '@angular/core';
+import { Router, ActivatedRoute }                   from '@angular/router';
 import { VdrService }   from '../shared/vdr.service';
 
 @Component({
@@ -44,9 +45,9 @@ export class AufnahmeComponent {
       return new Date( epoch * 1000);
     }
 
-    constructor(
-        private _vdrService: VdrService) {           
-	  }
+    constructor( private _vdrService: VdrService,  
+                 private _router: Router ) {
+	}
     
     getRecordImageUrl(aufnahme) {
        return this._vdrService.getRecordImageUrl(aufnahme);
@@ -57,6 +58,8 @@ export class AufnahmeComponent {
     }
 
     showdialog(rec) {
-      console.log(rec);
+      // console.log(rec);
+      this._router.navigate(['aufnahmen', rec.number]);
     }
+
 }
