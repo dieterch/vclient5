@@ -1,4 +1,4 @@
-.clickable {
+/* .clickable {
     cursor: pointer;
 }
 
@@ -9,10 +9,6 @@
     height: 300px;
     text-align: center;
     box-shadow: 1px 1px 1px 1px;
-}
-
-.poster {
-    width: 210px;
 }
 
 .thumbnail span.title {
@@ -29,11 +25,8 @@
     margin-left: -4px;
     margin-top: -4px;
     margin-bottom: 5px;
-    /* margin: .5em 10px .5em 0;*/
     overflow: hidden;
-    /* this is important */
     position: relative;
-    /* this is important too */
     border: 1px solid #ccc;
     width: 150px;
     height: 210px;
@@ -49,12 +42,8 @@
     width: 80px;
 }
 
-.container {
-    width: unset;
-}
-
 .panel {
-    /* background-color: gainsboro; */
+    background-color: gainsboro;
     border: none;
 }
 
@@ -66,4 +55,35 @@
 .buttonrow {
     margin-top: 20px;
     margin-bottom: 0px;
+}
+
+.postercontainer {
+    max-width: 90px;
+    float: left;
+}
+
+.poster {
+    height: 120px;
+    width: 90px;
+}
+
+.postertext {
+    float: left;
+    margin: 5px;
+} */
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+[class*="col-"] {
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*background-color: #eee;
+    background-color: rgba(86, 61, 124, .15); */
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86, 61, 124, .2);
+    border: none;
+    height: 130px;
 }

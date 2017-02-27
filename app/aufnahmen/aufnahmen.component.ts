@@ -22,7 +22,7 @@ export class AufnahmenComponent implements OnInit {
     aufnahmenLoading;
     pagedAufnahmen = [];
     currentAufnahme;
-    pageSize = 12;
+    pageSize = 24;
     categories = [];
     private _filter = null;
     private _category = null;
