@@ -21,7 +21,7 @@
     </div>
     <spinner [visible]="aufnahmenLoading "></spinner-->
 <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let aufnahme of pagedAufnahmen" [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme)">
+    <div class="col-sm-6 col-md-4 col-lg-3 mymedia" *ngFor="let aufnahme of pagedAufnahmen" [class.highlighted]="currentAufnahme==aufnahme " (click)="select(aufnahme)">
         <recording [myrecord]=aufnahme></recording>
     </div>
 </div>

@@ -80,6 +80,11 @@
     margin-bottom: 0px;
 }
 
+.mymedia {
+    border: none;
+    height: 130px;
+}
+
 [class*="col-"] {
     padding: 10px;
     padding-top: 5px;
@@ -88,6 +93,4 @@
     background-color: rgba(86, 61, 124, .15);
     border: 1px solid #ddd;
     border: 1px solid rgba(86, 61, 124, .2);
-    border: none;
-    height: 130px;
 }

@@ -1,56 +1,39 @@
-<h1>{{ title }}</h1>
+<!--h1>{{ title }}</h1-->
 <div class="row">
-    <div class="col-md-12 well">
+    <div class="col-md-12">
         <form [formGroup]="form" (ngSubmit)="save()">
             <fieldset>
-                <legend>
-                    {{ aufnahme.number }}
-                </legend>
-                <div class="form-group">
-                    <label>Name</label>
-                    <input [(ngModel)]="aufnahme.name" name="name" #name formControlName="name" type="text" class="form-control">
-                    <div *ngIf="name.touched && !name.valid" class="alert alert-danger">
-                        Name is required.
+                <div class="row">
+                    <div class="postercontainer">
+                        <img class="poster" src="{{ this._vdrService.getRecordImageUrl(aufnahme) }} " alt="kein Bild ">
+                    </div>
+                    <div class="postertext">
+                        <h3>{{ aufnahme.event_title }}</h3>
+                        Aufnahme Nr. <a href="{{ this._vdrService.getAufnahmeUrl(aufnahme.number)}} " class="">{{ aufnahme.number }}</a><br> Aufnahmedatum: {{ toDate(aufnahme.event_start_time) }}<br> Dauer: {{ aufnahme.event_duration / 60 | number : '1.0-0'
+                        }}'
+                        <br>Pfad: {{ aufnahme.relative_file_name }}
                     </div>
                 </div>
-                <!--div class="form-group">
-                    <label>Email</label>
-                    <input [(ngModel)]="aufnahme.email" #email formControlName="email" type="text" class="form-control">
-                    <div *ngIf="email.touched && !email.valid" class="alert alert-danger">
-                        Please type a valid email.
-                    </div>
-                </div-->
+                <hr>
                 <div class="form-group">
                     <label>Event Title</label>
                     <input [(ngModel)]="aufnahme.event_title" formControlName="event_title" type="text" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Filename</label>
-                    <input [(ngModel)]="aufnahme.file_name" formControlName="file_name" type="text" class="form-control">
+                    <label>Event Short Text</label>
+                    <textarea [(ngModel)]="aufnahme.event_short_text" formControlName="event_short_text" cols="40" rows="2" type="text" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Event Description</label>
+                    <textarea [(ngModel)]="aufnahme.event_description" formControlName="event_description" cols="40" rows="6" type="text" class="form-control"></textarea>
                 </div>
             </fieldset>
-            <!--fieldset formGroupName="address">
-                <legend>Address</legend>
-                <div class="form-group">
-                    <label>Street</label>
-                    <input [(ngModel)]="aufnahme.address.street" formControlName="street" type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Suite</label>
-                    <input [(ngModel)]="aufnahme.address.suite" formControlName="suite" type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input [(ngModel)]="aufnahme.address.city" formControlName="city" type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>ZipCode</label>
-                    <input [(ngModel)]="aufnahme.address.zipcode" formControlName="zipcode" type="text" class="form-control">
-                </div>
-            </fieldset-->
-            <button [disabled]="!form.valid" type="submit" class="btn btn-primary">
-                Save
+            <button type="submit" class="btn btn-primary">
+                Zurück
             </button>
-        </form>
+            <a role="button " *ngIf="!aufnahme.is_pes_recording " [href]="this._vdrService.streamRecordUrl(aufnahme) "><span class="fa fa-caret-square-o-right fa-3x "></span></a>
+            <a role="button " (click)="this._vdrService.playRecordonTV(aufnahme) "><span class="fa fa-play-circle-o fa-3x "></span></a>
+            <a role="button " (click)="this._vdrService.playRecordonTVCont(aufnahme) "><span class="fa fa-play-circle fa-3x "></span></a>
+            <a role="button " (click)="this._vdrService.pressKey( 'Stop') "><span class="fa fa-stop-circle-o fa-3x "></span></a> </form>
     </div>
 </div>

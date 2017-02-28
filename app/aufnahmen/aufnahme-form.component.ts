@@ -7,8 +7,29 @@ import { VdrService }                            from '../shared/vdr.service';
 import { Aufnahme }                              from './aufnahme';
 
 @Component({
-    templateUrl: 'app/aufnahmen/aufnahme-form.component.html'
+    templateUrl: 'app/aufnahmen/aufnahme-form.component.html',
+    styles: [`
+        .postercontainer {
+            margin-left: 10px;
+            max-width: 135px;
+            float: left;
+        }
+
+        .poster {
+            height: 180px;
+            width: 135px;
+        }
+
+        .postertext {
+            float: left;
+            margin-left: 10px;
+            width: calc(100% - 155px);
+            font-size: 90%;
+        }
+  `] 
 })
+
+
 export class AufnahmeFormComponent implements OnInit {
 	form: FormGroup;
     title: string;
@@ -22,8 +43,6 @@ export class AufnahmeFormComponent implements OnInit {
     ) {
 		this.form = fb.group({
 			name: ['', Validators.required],
-			email: ['', BasicValidators.email],
-			phone: [],
             number: [],
             file_name: [],
             relative_file_name: [],
@@ -58,7 +77,7 @@ export class AufnahmeFormComponent implements OnInit {
                 .subscribe(
                     record => {
                         this.aufnahme = record;
-                        console.log(record);    
+                        // console.log(record);    
                     },
                     response => {
                         if (response.status == 404) {
@@ -83,4 +102,8 @@ export class AufnahmeFormComponent implements OnInit {
         //});
         this._router.navigate(['aufnahmen']);
 	}
+
+    toDate(epoch) {
+      return new Date( epoch * 1000).toLocaleDateString();
+    }
 }
