@@ -85,6 +85,10 @@
     height: 130px;
 }
 
+.mymedia:hover {
+    background-color: white;
+}
+
 [class*="col-"] {
     padding: 10px;
     padding-top: 5px;

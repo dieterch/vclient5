@@ -26,6 +26,10 @@ import { Aufnahme }                              from './aufnahme';
             width: calc(100% - 155px);
             font-size: 90%;
         }
+
+        .aufnahmeform {
+            background-color: white;
+        }
   `] 
 })
 
@@ -105,5 +109,12 @@ export class AufnahmeFormComponent implements OnInit {
 
     toDate(epoch) {
       return new Date( epoch * 1000).toLocaleDateString();
+    }
+
+    toPath(p) {
+        if (p) {
+            var h = p.slice(0,p.lastIndexOf('/'));
+            return h.slice(0,h.lastIndexOf('/')+1)
+        } else return p
     }
 }

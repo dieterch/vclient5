@@ -1,6 +1,6 @@
 <!--h1>{{ title }}</h1-->
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 aufnahmeform">
         <form [formGroup]="form" (ngSubmit)="save()">
             <fieldset>
                 <div class="row">
@@ -9,13 +9,14 @@
                     </div>
                     <div class="postertext">
                         <h3>{{ aufnahme.event_title }}</h3>
-                        Aufnahme Nr. <a href="{{ this._vdrService.getAufnahmeUrl(aufnahme.number)}} " class="">{{ aufnahme.number }}</a><br> Aufnahmedatum: {{ toDate(aufnahme.event_start_time) }}<br> Dauer: {{ aufnahme.event_duration / 60 | number : '1.0-0'
-                        }}'
-                        <br>Pfad: {{ aufnahme.relative_file_name }}
+                        <p>
+                            Nr. <a href="{{ this._vdrService.getAufnahmeUrl(aufnahme.number)}} ">{{ aufnahme.number }}</a>, {{ toDate(aufnahme.event_start_time) }}, {{ aufnahme.event_duration / 60 | number : '1.0-0' }}', {{toPath(aufnahme.relative_file_name)}}
+                        </p>
+                        <p>{{aufnahme.event_description}}</p>
                     </div>
                 </div>
                 <hr>
-                <div class="form-group">
+                <!--div class="form-group">
                     <label>Event Title</label>
                     <input [(ngModel)]="aufnahme.event_title" formControlName="event_title" type="text" class="form-control">
                 </div>
@@ -26,14 +27,13 @@
                 <div class="form-group">
                     <label>Event Description</label>
                     <textarea [(ngModel)]="aufnahme.event_description" formControlName="event_description" cols="40" rows="6" type="text" class="form-control"></textarea>
-                </div>
+                </div-->
             </fieldset>
-            <button type="submit" class="btn btn-primary">
-                Zurück
-            </button>
-            <a role="button " *ngIf="!aufnahme.is_pes_recording " [href]="this._vdrService.streamRecordUrl(aufnahme) "><span class="fa fa-caret-square-o-right fa-3x "></span></a>
-            <a role="button " (click)="this._vdrService.playRecordonTV(aufnahme) "><span class="fa fa-play-circle-o fa-3x "></span></a>
-            <a role="button " (click)="this._vdrService.playRecordonTVCont(aufnahme) "><span class="fa fa-play-circle fa-3x "></span></a>
-            <a role="button " (click)="this._vdrService.pressKey( 'Stop') "><span class="fa fa-stop-circle-o fa-3x "></span></a> </form>
+            <button type="submit" class="btn btn-standard "><span class="fa fa-caret-left fa-lg"></span></button>
+            <button class="btn btn-primary" (click)="this._vdrService.playRecordonTV(aufnahme) "><span class="fa fa-play fa-lg "></span></button>
+            <a class="btn btn-primary" role="button " (click)="this._vdrService.playRecordonTVCont(aufnahme) "><span class="fa fa-chevron-right fa-lg "></span></a>
+            <a class="btn btn-primary" role="button " (click)="this._vdrService.pressKey( 'Stop') "><span class="fa fa-stop fa-lg "></span></a>
+            <a class="btn btn-primary" role="button " *ngIf="!aufnahme.is_pes_recording " [href]="this._vdrService.streamRecordUrl(aufnahme) "><span class="fa fa-rss fa-lg "></span></a>
+        </form>
     </div>
 </div>
