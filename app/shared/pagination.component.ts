@@ -8,14 +8,17 @@ import { OnChanges } from '@angular/core';
 @Component({
 	selector: 'pagination',
     template: `
-    <div *ngIf="items.length > pageSize">
+    <!-- div *ngIf="items.length > pageSize"-->
+	<div>
         <ul class="pagination">
-            <li [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
-				<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
-            </li>
-			<li [class.disabled]="currentPage == 1">
-                <a (click)="previous()" aria-label="Previous">
-				<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
+			<li>
+				<a [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
+					<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+				</a>
+			</li>
+			<li>
+                <a [class.disabled]="currentPage == 1" (click)="previous()" aria-label="Previous">
+					<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
                 </a>
             </li>
 			<li> 
@@ -26,9 +29,11 @@ import { OnChanges } from '@angular/core';
 				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                 </a>
             </li>
-            <li [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
-				<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
-            </li>
+			<li>
+				<a [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
+					<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+				</a>
+			</li>
         </ul>
     </div>  
 `
