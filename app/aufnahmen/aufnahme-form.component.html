@@ -5,7 +5,7 @@
             <fieldset>
                 <div class="row">
                     <div class="postercontainer">
-                        <img class="poster" src="{{ this._vdrService.getRecordImageUrl(aufnahme) }} " alt="kein Bild ">
+                        <img class="poster" (error)="myerror($event)" src="{{ this._vdrService.getRecordImageUrl(aufnahme) }} " alt="kein Bild ">
                     </div>
                     <div class="postertext">
                         <h3>{{ aufnahme.event_title }}</h3>

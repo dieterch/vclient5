@@ -111,6 +111,10 @@ export class AufnahmeFormComponent implements OnInit {
       return new Date( epoch * 1000).toLocaleDateString();
     }
 
+    myerror($event) {
+        $event.srcElement.src=this._vdrService.getAltImageUrl();
+    }
+
     toPath(p) {
         if (p) {
             var h = p.slice(0,p.lastIndexOf('/'));
