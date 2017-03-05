@@ -163,6 +163,7 @@ export class VdrService implements OnInit {
 
 	getAltImageUrl() {
 		return this._pyresturl + "/images/404-page-not-found-image.jpg";
+		// return this._pyresturl + "/images/no%20poster.jpg";
 	}
 
 	pressKey(key?) {

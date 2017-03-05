@@ -16,7 +16,7 @@
 
 <div class="record" (click)="showdialog(myrecord); ">
     <div class="postercontainer ">
-        <img class="poster " src="{{ this._vdrService.getRecordImageUrl(myrecord) }} " alt="kein Bild ">
+        <img class="poster" (error)="myerror($event)" src="{{ this._vdrService.getRecordImageUrl(myrecord) }} " alt="kein Bild ">
     </div>
     <div class="postertext ">
         <h5 id="titeltext ">{{ myrecord.event_title }}</h5>

@@ -48,9 +48,9 @@ export class AufnahmeComponent {
     constructor( private _vdrService: VdrService,  
                  private _router: Router ) {
 	}
-    
-    getRecordImageUrl(aufnahme) {
-       return this._vdrService.getRecordImageUrl(aufnahme);
+
+    myerror($event) {
+        $event.srcElement.src=this._vdrService.getAltImageUrl();
     }
 
     ellipse(text, l) {
