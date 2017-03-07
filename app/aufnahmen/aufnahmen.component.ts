@@ -36,10 +36,11 @@ export class AufnahmenComponent implements OnInit {
         this.loadCategories();        
 	}
     
-    private loadAufnahmen(filter?, category?){
+    private loadAufnahmen(query?, category?){
         this.aufnahmenLoading = true;
         //console.log(filter, category);
-        this._vdrService.getRecordings(filter, category)
+        let sort = "date-reverse"
+        this._vdrService.getRecordings(query, category, sort)
             .subscribe(
                 aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;

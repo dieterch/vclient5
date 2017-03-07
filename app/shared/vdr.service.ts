@@ -92,52 +92,74 @@ export class VdrService implements OnInit {
 		);
 	}
 
-	getRecordings(filter?, category?) {
-		var url = this._resturl + "/recordings.json?start=0&limit=0";
-		// console.log(this._http.get(url))
+
+	getRecordings(query?, category?, sort?) {
+		let url = "http://192.168.11.8:8080/aufnahmen";
+		let myquery = "";
+
+		if (query) {
+			myquery = myquery + "&query=" + query;
+		}
+		if (category) {
+			myquery = myquery + "&category=" + category;
+		}
+		if (sort) {
+			myquery = myquery + "&sort=" + sort;
+		}
+		if (myquery != "") {
+			url = url + "?" + myquery.slice(1);
+		}
+		console.log(url);
 		return this._http.get(url)
-			.map(res => {
-
-				// respose im json format lesen
-				var myres = res.json();
-
-				// myres nach category filtern
-				if (category) {
-					myres.recordings = myres.recordings.filter( rec => rec.name.indexOf(category) >=0 );
-				}
-
-				// myres filtern
-				if (filter) {
-					myres.recordings = myres.recordings.filter( rec => rec.event_title.indexOf(filter) >=0 );
-				}
-
-				/* Sortieren nach titel
-				myres.recordings.sort((n1,n2) => {
-					if (n1.event_title > n2.event_title) {
-						return 1;
-					}
-					if (n1.event_title < n2.event_title) {
-						return -1;
-					}
-					return 0;
-				}) */
-
-				// Sortieren Absteigend nach Datum
-				myres.recordings.sort((n1,n2) => { return n2.event_start_time - n1.event_start_time })
-
-
-				/*/ Felder ändern/ergänzen
-				myres.recordings.forEach(aufnahme => {
-					// aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";
-					// aufnahme.streamurl = this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=http://192.168.11.8:3000/" + aufnahme.inode + ".rec");
-					// aufnahme.openvlc = this.sanitizer.bypassSecurityTrustUrl("http://192.168.11.8:5100/playpc/" + aufnahme.number);
-					//aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play/" + encodeURIComponent(aufnahme.file_name));
-					//aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play" + aufnahme.file_name);
-				}); */
-
-				return myres
-			});
+			.map(res => res.json());
 	}
+
+	// getRecordings(filter?, category?) {
+	// 	var url = this._resturl + "/recordings.json?start=0&limit=0";
+	// 	// console.log(this._http.get(url))
+	// 	return this._http.get(url)
+	// 		.map(res => {
+
+	// 			// respose im json format lesen
+	// 			var myres = res.json();
+
+	// 			// myres nach category filtern
+	// 			if (category) {
+	// 				myres.recordings = myres.recordings.filter( rec => rec.name.indexOf(category) >=0 );
+	// 			}
+
+	// 			// myres filtern
+	// 			if (filter) {
+	// 				myres.recordings = myres.recordings.filter( rec => rec.event_title.indexOf(filter) >=0 );
+	// 			}
+
+	// 			/* Sortieren nach titel
+	// 			myres.recordings.sort((n1,n2) => {
+	// 				if (n1.event_title > n2.event_title) {
+	// 					return 1;
+	// 				}
+	// 				if (n1.event_title < n2.event_title) {
+	// 					return -1;
+	// 				}
+	// 				return 0;
+	// 			}) */
+
+	// 			// Sortieren Absteigend nach Datum
+	// 			myres.recordings.sort((n1,n2) => { return n2.event_start_time - n1.event_start_time })
+
+
+	// 			/*/ Felder ändern/ergänzen
+	// 			myres.recordings.forEach(aufnahme => {
+	// 				// aufnahme.imageurl = "http://192.168.11.8:5100/images/" + aufnahme.event_title + ".jpg";
+	// 				// aufnahme.streamurl = this.sanitizer.bypassSecurityTrustUrl("vlc-x-callback://x-callback-url/stream?url=http://192.168.11.8:3000/" + aufnahme.inode + ".rec");
+	// 				// aufnahme.openvlc = this.sanitizer.bypassSecurityTrustUrl("http://192.168.11.8:5100/playpc/" + aufnahme.number);
+	// 				//aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play/" + encodeURIComponent(aufnahme.file_name));
+	// 				//aufnahme.startonTv = this.sanitizer.bypassSecurityTrustUrl(this._url + "/recordings/play" + aufnahme.file_name);
+	// 			}); */
+
+	// 			return myres
+	// 		});
+	// }
 
 	getRecording(Id){
 		return this._http.get(this.getAufnahmeUrl(Id))
