@@ -96,20 +96,11 @@ export class VdrService implements OnInit {
 	getRecordings(query?, category?, sort?) {
 		let url = "http://192.168.11.8:8080/aufnahmen";
 		let myquery = "";
-
-		if (query) {
-			myquery = myquery + "&query=" + query;
-		}
-		if (category) {
-			myquery = myquery + "&category=" + category;
-		}
-		if (sort) {
-			myquery = myquery + "&sort=" + sort;
-		}
-		if (myquery != "") {
-			url = url + "?" + myquery.slice(1);
-		}
-		console.log(url);
+		if (query) { myquery = myquery + "&query=" + query;}
+		if (category) { myquery = myquery + "&category=" + category;}
+		if (sort) { myquery = myquery + "&sort=" + sort;}
+		if (myquery != "") { url = url + "?" + myquery.slice(1);}
+		// console.log(url);
 		return this._http.get(url)
 			.map(res => res.json());
 	}
