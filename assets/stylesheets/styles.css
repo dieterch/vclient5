@@ -89,7 +89,7 @@
 }
 
 .mymedia:hover {
-    background-color: white;
+    background-color: lightgray;
 }
 
 [class*="col-"] {
