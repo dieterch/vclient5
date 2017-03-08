@@ -5,12 +5,12 @@
             <fieldset>
                 <div class="row">
                     <div class="postercontainer">
-                        <img class="poster" (error)="myerror($event)" src="{{ this._vdrService.getRecordImageUrl(aufnahme) }} " alt="kein Bild ">
+                        <img class="poster" (error)="myerror($event)" src="{{ aufnahme.imageurl }}" alt="kein Bild ">
                     </div>
                     <div class="postertext">
                         <h3>{{ aufnahme.event_title }}</h3>
                         <p>
-                            Nr. <a href="{{ this._vdrService.getAufnahmeUrl(aufnahme.number)}} ">{{ aufnahme.number }}</a>, {{ toDate(aufnahme.event_start_time) }}, {{ aufnahme.event_duration / 60 | number : '1.0-0' }}', {{toPath(aufnahme.relative_file_name)}}
+                            Nr. <a href="{{ this._vdrService.getAufnahmeUrl(aufnahme.number) }}">{{ aufnahme.number }}</a>, {{ toDate(aufnahme.event_start_time) }}, {{ aufnahme.event_duration / 60 | number : '1.0-0' }}', {{toPath(aufnahme.relative_file_name)}}
                         </p>
                         <p>{{aufnahme.event_description}}</p>
                     </div>
