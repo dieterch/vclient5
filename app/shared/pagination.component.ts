@@ -22,7 +22,7 @@ import { OnChanges } from '@angular/core';
                 </a>
             </li>
 			<li> 
-				<a>{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
+				<a class="pagbuttons">{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
 			</li>
             <li [class.disabled]="currentPage == pages.length + 1">
                 <a (click)="next()" aria-label="Next">
@@ -36,7 +36,20 @@ import { OnChanges } from '@angular/core';
 			</li>
         </ul>
     </div>  
-`
+	`,
+  styles: [`
+    .pagbuttons {
+		padding: 5px;
+
+    }
+
+	.pagination {
+		height: 49px;
+		margin-left: 50px;
+		margin-top: 5px;
+		margin-bottom: -15px;
+	}
+  `] 
 })
 
 
