@@ -8,8 +8,8 @@ import * as _ from 'underscore';
 @Injectable()
 export class VdrService implements OnInit {
 	private _vdrurl = "http://192.168.11.8";
-	// private _restproxyurl = this._vdrurl + ":8080";
-	private _restproxyurl = "http://localhost:8080";
+	private _restproxyurl = this._vdrurl + ":8080";
+	// private _restproxyurl = "http://localhost:8080";
 	private _resturl = this._vdrurl + ":8002";
 	private _pyresturl = this._vdrurl + ":5100"; 
     private _keys = {
