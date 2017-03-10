@@ -115,7 +115,7 @@ export class AufnahmenComponent implements OnInit {
             // console.log(" 4 ")
             x = 4;
         }
-        y = Math.floor(window.innerHeight / 150) -1 ;
+        y = Math.floor(window.innerHeight / 150 + 0.5);
         console.log("Pagesize: ", x*y)
         return x*y
     }
