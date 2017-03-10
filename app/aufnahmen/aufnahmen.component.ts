@@ -6,6 +6,10 @@ import * as _ from 'underscore';
 @Component({
     templateUrl: 'app/aufnahmen/aufnahmen.component.html',
     styles: [`
+        .searchline {
+            padding 10px;
+        }
+
         .aufnahmen li { cursor: default; }
         .aufnahmen li:hover { background: #ecf0f1; } 
         .list-group-item.active, 
@@ -22,7 +26,8 @@ export class AufnahmenComponent implements OnInit {
     aufnahmenLoading;
     pagedAufnahmen = [];
     currentAufnahme;
-    pageSize = 24;
+    pageSize = 10;
+    oldpagesize = 10;
     categories = [];
     private _filter = null;
     private _category = null;
@@ -33,12 +38,13 @@ export class AufnahmenComponent implements OnInit {
 
 	ngOnInit() {
         this.loadAufnahmen();
-        this.loadCategories();        
+        this.loadCategories();
 	}
     
     private loadAufnahmen(query?, category?){
         this.aufnahmenLoading = true;
         //console.log(filter, category);
+        this.pageSize = this.calcPageSize();
         let sort = "date-reverse"
         this._vdrService.getRecordings(query, category, sort)
             .subscribe(
@@ -81,4 +87,36 @@ export class AufnahmenComponent implements OnInit {
         var startIndex = (page - 1) * this.pageSize;
         this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);
 	}
+
+    onResize($event) {
+        // console.log(window.innerWidth, window.innerHeight);
+        this.pageSize = this.calcPageSize();
+        if (this.oldpagesize != this.pageSize) {
+            this.reloadAufnahmen();
+            this.oldpagesize = this.pageSize
+        }
+    }
+
+    calcPageSize() {
+        let x=0; 
+        let y=0;
+        if (window.innerWidth < 768) {
+            // console.log(" 1 ");
+            x = 1;
+        } else 
+        if (window.innerWidth < 990) {
+            // console.log(" 2 ")
+            x = 2;
+        } else
+        if (window.innerWidth < 1200 ) {
+            // console.log(" 3 ")
+            x = 3;
+        } else {
+            // console.log(" 4 ")
+            x = 4;
+        }
+        y = Math.floor(window.innerHeight / 150) -1 ;
+        console.log("Pagesize: ", x*y)
+        return x*y
+    }
 }

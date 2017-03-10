@@ -12,6 +12,7 @@ import { VdrService }   from '../shared/vdr.service';
     }
 
     .poster {
+        margin-top: 10px;
         height: 120px;
         width: 90px;
     }
@@ -35,6 +36,22 @@ import { VdrService }   from '../shared/vdr.service';
     .icons {
         vertical-align: bottom;
     }
+
+    .record {
+        padding: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: 3px;
+        background-color: lightgray;
+        border: 1px solid rgba(86, 61, 124, .2);
+        height: 150px;
+        /* box-shadow: 2px 2px grey; */
+    }
+
+    .record:hover {
+        background-color: white;
+    }
+
   `]  
 })
 

@@ -69,26 +69,15 @@
 } */
 
 .container {
-    width: unset;
+    width: 98%;
 }
 
 .navbar {
-    margin-bottom: 0px;
-}
-
-.mymedia {
-    border: none;
-    height: 130px;
-}
-
-.mymedia:hover {
-    background-color: lightgray;
+    margin-bottom: 3px;
 }
 
 [class*="col-"] {
-    padding: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 0px;
     /* background-color: #eee;
     background-color: rgba(86, 61, 124, .15);
     border: 1px solid #ddd;
