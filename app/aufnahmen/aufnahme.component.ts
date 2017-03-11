@@ -43,7 +43,7 @@ import { VdrService }   from '../shared/vdr.service';
         padding-bottom: 5px;
         margin: 3px;
         // background-color: #707070;
-        border: 1px solid rgba(86, 61, 124, .2);
+        border: 0px solid rgba(86, 61, 124, .2);
         height: 150px;
         /* box-shadow: 2px 2px grey; */
     }
