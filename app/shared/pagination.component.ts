@@ -26,7 +26,7 @@ import { OnChanges } from '@angular/core';
 			<a class="btn btn-default btn-sm" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
 				<span class="fa fa-fast-forward fa-lg " aria-hidden="true"></span>
 			</a>
-			<a class="btn btn-default btn-sm" role="button ">
+			<a class="btn btn-default btn-sm" role="button " (click)="resetPage()">
 				<span class="fa fa-circle-thin fa-lg " aria-hidden="true"></span>
 			</a>
 		<div>
@@ -35,7 +35,7 @@ import { OnChanges } from '@angular/core';
 	styles: [`
 		.mypagination {
 			float: right;
-			margin: 4px auto;
+			margin: 8px auto;
 			padding-right: 20px;
 		}
 	`]
@@ -46,6 +46,7 @@ export class PaginationComponent implements OnChanges {
     @Input() items = [];
 	@Input('page-size') pageSize = 5;
 	@Output('page-changed') pageChanged = new EventEmitter();
+	@Output('page-reset') pageReset = new EventEmitter();
 	pages: any[];
 	currentPage; 
 
@@ -69,6 +70,10 @@ export class PaginationComponent implements OnChanges {
 
 		this.currentPage--;
 		this.pageChanged.emit(this.currentPage);
+	}
+
+	resetPage(){
+		this.pageReset.emit();
 	}
 
 	next(){

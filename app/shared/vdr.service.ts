@@ -11,7 +11,9 @@ export class VdrService implements OnInit {
 	private _restproxyurl = this._vdrurl + ":8080";
 	// private _restproxyurl = "http://localhost:8080";
 	private _resturl = this._vdrurl + ":8002";
-	private _pyresturl = this._vdrurl + ":5100"; 
+	private _pyresturl = this._vdrurl + ":5100";
+    _filter = null;
+    _category = null;	
     private _keys = {
          "Up" : this._resturl + "/remote/Up",
          "Down" : this._resturl + "/remote/Down",

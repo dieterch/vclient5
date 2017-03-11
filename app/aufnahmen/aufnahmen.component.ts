@@ -34,8 +34,6 @@ export class AufnahmenComponent implements OnInit {
     pageSize = 10;
     oldpagesize = 10;
     categories = [];
-    private _filter = null;
-    private _category = null;
     
     constructor(
         private _vdrService: VdrService ) { 
@@ -64,16 +62,16 @@ export class AufnahmenComponent implements OnInit {
 
     reloadAufnahmen(){
         this.currentAufnahme = null;
-        this.loadAufnahmen(this._filter, this._category);
+        this.loadAufnahmen(this._vdrService._filter, this._vdrService._category);
     }
 
     reloadAufnahmenFilter(filter){
-        this._filter = filter;
+        this._vdrService._filter = filter;
         this.reloadAufnahmen();
     }
 
     reloadAufnahmenCategory(category){
-        this._category = category;
+        this._vdrService._category = category;
         this.reloadAufnahmen();
     }
 
@@ -92,6 +90,12 @@ export class AufnahmenComponent implements OnInit {
         var startIndex = (page - 1) * this.pageSize;
         this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);
 	}
+
+    onReset() {
+        this._vdrService._filter = null;
+        this._vdrService._category = null;
+        this.reloadAufnahmen();
+    }
 
     onResize($event) {
         this.pageSize = this.calcPageSize();
