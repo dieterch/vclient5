@@ -16,6 +16,8 @@ import { usersRouting }      from './users/users.routing';
 import { postsRouting }      from './posts/posts.routing';
 import { aufnahmenRouting }  from './aufnahmen/aufnahmen.routing';
 import { routing }           from './app.routing';
+// import 'hammerjs';
+// import 'hammer-timejs';
 
 @NgModule({
     imports: [

@@ -9,47 +9,36 @@ import { OnChanges } from '@angular/core';
 	selector: 'pagination',
     template: `
     <!-- div *ngIf="items.length > pageSize"-->
-	<div>
-        <ul class="pagination">
-			<li>
-				<a [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
-					<span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
-				</a>
-			</li>
-			<li>
-                <a [class.disabled]="currentPage == 1" (click)="previous()" aria-label="Previous">
-					<span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-                </a>
-            </li>
-			<li> 
-				<a class="pagbuttons">{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})</a> 
-			</li>
-            <li [class.disabled]="currentPage == pages.length + 1">
-                <a (click)="next()" aria-label="Next">
-				<span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-                </a>
-            </li>
-			<li>
-				<a [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
-					<span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
-				</a>
-			</li>
-        </ul>
+	<div class="mypagination">
+		<div class="buttonrow">
+			<a class="btn btn-default" role="button " [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
+				<span class="fa fa-fast-backward fa-lg " aria-hidden="true"></span>
+			</a>
+			<a class="btn btn-default" role="button " [class.disabled]="currentPage == 1" (click)="previous()" aria-label="Previous">
+				<span class="fa fa-step-backward fa-lg " aria-hidden="true"></span>
+			</a>		
+			<span>
+				{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})
+			</span> 
+			<a class="btn btn-default" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="next()" aria-label="Next">
+				<span class="fa fa-step-forward fa-lg " aria-hidden="true"></span>
+			</a>
+			<a class="btn btn-default" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
+				<span class="fa fa-fast-forward fa-lg " aria-hidden="true"></span>
+			</a>
+			<a class="btn btn-default" role="button ">
+				<span class="fa fa-circle-thin fa-lg " aria-hidden="true"></span>
+			</a>
+		<div>
     </div>  
 	`,
-  styles: [`
-    .pagbuttons {
-		padding: 5px;
-
-    }
-
-	.pagination {
-		height: 49px;
-		margin-left: 50px;
-		margin-top: 5px;
-		margin-bottom: -15px;
-	}
-  `] 
+	styles: [`
+		.mypagination {
+			float: right;
+			margin: 4px auto;
+			padding-right: 20px;
+		}
+	`]
 })
 
 

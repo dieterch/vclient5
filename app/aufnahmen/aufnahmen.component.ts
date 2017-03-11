@@ -6,19 +6,24 @@ import * as _ from 'underscore';
 @Component({
     templateUrl: 'app/aufnahmen/aufnahmen.component.html',
     styles: [`
-        .searchline {
-            padding 10px;
+        .debug1 {
+            background-color: yellow;
         }
 
-        .aufnahmen li { cursor: default; }
-        .aufnahmen li:hover { background: #ecf0f1; } 
-        .list-group-item.active, 
-        .list-group-item.active:hover, 
-        .list-group-item.active:focus { 
-            background-color: #ecf0f1;
-            border-color: #ecf0f1; 
-            color: #2c3e50;
+        .debug2 {
+            background-color: lightblue;
         }
+
+        .searchbox {
+            margin: 2 auto;
+            max-width: 250px;        
+        }      
+
+        .categorybox {
+            margin: 2 auto;
+            max-width: 250px;        
+        }
+
     `]
 })
 export class AufnahmenComponent implements OnInit {
@@ -89,7 +94,6 @@ export class AufnahmenComponent implements OnInit {
 	}
 
     onResize($event) {
-        // console.log(window.innerWidth, window.innerHeight);
         this.pageSize = this.calcPageSize();
         if (this.oldpagesize != this.pageSize) {
             this.reloadAufnahmen();
@@ -100,23 +104,12 @@ export class AufnahmenComponent implements OnInit {
     calcPageSize() {
         let x=0; 
         let y=0;
-        if (window.innerWidth < 768) {
-            // console.log(" 1 ");
-            x = 1;
-        } else 
-        if (window.innerWidth < 990) {
-            // console.log(" 2 ")
-            x = 2;
-        } else
-        if (window.innerWidth < 1200 ) {
-            // console.log(" 3 ")
-            x = 3;
-        } else {
-            // console.log(" 4 ")
-            x = 4;
-        }
+        if (window.innerWidth < 768)   { x = 1; } else 
+        if (window.innerWidth < 990)   { x = 2; } else
+        if (window.innerWidth < 1200 ) { x = 3; } else 
+                                       { x = 4;}
         y = Math.floor(window.innerHeight / 150);
-        console.log("Pagesize: ", x*y)
+        // console.log("Pagesize: ", x*y)
         return x*y
     }
 }

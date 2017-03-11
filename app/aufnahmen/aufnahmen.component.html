@@ -1,21 +1,25 @@
 <!--h1>Aufnahmen</h1-->
 <div class="row">
     <div class="col-md-12">
-        <div class="row searchline">
+        <div class="row">
+
             <div class="col-md-4">
-                <input type="text" id="search" placeholder="Suchen ..." class="form-control" (change)="reloadAufnahmenFilter(u.value)" #u>
+                <input type="text" id="search" placeholder="Suchen ..." class="form-control searchbox" (change)="reloadAufnahmenFilter(u.value)" #u>
             </div>
+
             <div class="col-md-4">
-                <select class="form-control" (change)="reloadAufnahmenCategory(c.value)" (click)="loadCategories()" #c>
+                <select class="form-control categorybox" (change)="reloadAufnahmenCategory(c.value)" (click)="loadCategories()" #c>
                     <option value="">Kategorie wählen ...</option>
                     <option *ngFor="let cat of categories" value="{{ cat }}">
                         {{ cat }}
                     </option>
                 </select>
             </div>
+
             <div class="col-md-4">
                 <pagination [items]="aufnahmen " [page-size]="pageSize" (page-changed)="onPageChanged($event) "></pagination>
             </div>
+
         </div>
     </div>
 </div>
