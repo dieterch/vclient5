@@ -36,7 +36,7 @@ import { OnChanges } from '@angular/core';
 		.mypagination {
 			float: right;
 			margin: 4px auto;
-			padding-right: 20px;
+			padding-right: 10px;
 		}
 	`]
 })
