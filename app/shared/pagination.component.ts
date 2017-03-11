@@ -11,22 +11,22 @@ import { OnChanges } from '@angular/core';
     <!-- div *ngIf="items.length > pageSize"-->
 	<div class="mypagination">
 		<div class="buttonrow">
-			<a class="btn btn-default" role="button " [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
+			<a class="btn btn-default btn-sm" role="button " [class.disabled]="currentPage == 1" (click)="changePage((currentPage - this.pageSize) > 1 ? (currentPage - this.pageSize) : 1) ">
 				<span class="fa fa-fast-backward fa-lg " aria-hidden="true"></span>
 			</a>
-			<a class="btn btn-default" role="button " [class.disabled]="currentPage == 1" (click)="previous()" aria-label="Previous">
+			<a class="btn btn-default btn-sm" role="button " [class.disabled]="currentPage == 1" (click)="previous()" aria-label="Previous">
 				<span class="fa fa-step-backward fa-lg " aria-hidden="true"></span>
 			</a>		
 			<span>
 				{{ (currentPage - 1) * this.pageSize + 1 }} - {{ currentPage * this.pageSize }} ({{ this.items.length }})
 			</span> 
-			<a class="btn btn-default" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="next()" aria-label="Next">
+			<a class="btn btn-default btn-sm" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="next()" aria-label="Next">
 				<span class="fa fa-step-forward fa-lg " aria-hidden="true"></span>
 			</a>
-			<a class="btn btn-default" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
+			<a class="btn btn-default btn-sm" role="button " [class.disabled]="currentPage == pages.length + 1" (click)="changePage((currentPage + this.pageSize) < pages.length ? (currentPage + this.pageSize) : pages.length)">
 				<span class="fa fa-fast-forward fa-lg " aria-hidden="true"></span>
 			</a>
-			<a class="btn btn-default" role="button ">
+			<a class="btn btn-default btn-sm" role="button ">
 				<span class="fa fa-circle-thin fa-lg " aria-hidden="true"></span>
 			</a>
 		<div>
@@ -36,7 +36,7 @@ import { OnChanges } from '@angular/core';
 		.mypagination {
 			float: right;
 			margin: 4px auto;
-			padding-right: 10px;
+			padding-right: 20px;
 		}
 	`]
 })
