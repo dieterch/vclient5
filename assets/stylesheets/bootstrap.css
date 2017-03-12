@@ -7184,7 +7184,7 @@ button.close {
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
-    line-break: auto;
+    /* line-break: auto; */
     line-height: 1.4;
     text-align: left;
     text-align: start;
@@ -7318,7 +7318,7 @@ button.close {
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
-    line-break: auto;
+    /*line-break: auto;*/
     line-height: 1.4;
     text-align: left;
     text-align: start;

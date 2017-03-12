@@ -11,8 +11,6 @@ export class VdrService implements OnInit {
 	private _restproxyurl = this._vdrurl + ":8080";
 	// private _restproxyurl = "http://localhost:8080";
 	private _resturl = this._vdrurl + ":8002";
-	// private _pyresturl = this._vdrurl + ":5100";
-	private _pyresturl = this._restproxyurl;
     _filter = null;
     _category = null;	
     private _keys = {
@@ -108,12 +106,12 @@ export class VdrService implements OnInit {
 
 	getRecordImageUrl(rec?) {
 		if (rec) {
-			return this._pyresturl + "/images/" + rec.event_title + ".jpg";
+			return this._restproxyurl + "/images/" + rec.event_title + ".jpg";
 		}
 	}
 
 	getAltImageUrl() {
-		return this._pyresturl + "/images/404-page-not-found-image.jpg";
+		return this._restproxyurl + "/images/404-page-not-found-image.jpg";
 		// return this._pyresturl + "/images/no%20poster.jpg";
 	}
 
@@ -150,7 +148,7 @@ export class VdrService implements OnInit {
 			if (this.isMobile()) {
                 _lurl = "vlc-x-callback://x-callback-url/stream?url=" + this._vdrurl + ":3000/" + rec.inode + ".rec";
             }  else {
-                _lurl = this._pyresturl + "/playpc/" + rec.number;
+                _lurl = this._restproxyurl + "/playpc/" + rec.number;
             }
             return this.sanitizer.bypassSecurityTrustUrl(_lurl);
 		}
