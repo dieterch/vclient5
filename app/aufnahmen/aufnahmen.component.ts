@@ -32,6 +32,7 @@ export class AufnahmenComponent implements OnInit {
     pagedAufnahmen = [];
     currentAufnahme;
     pageSize = 10;
+    currentpage;
     oldpagesize = 10;
     categories = [];
     
@@ -87,6 +88,7 @@ export class AufnahmenComponent implements OnInit {
     }
 
 	onPageChanged(page) {
+        this.currentpage = page;
         var startIndex = (page - 1) * this.pageSize;
         this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);
 	}
