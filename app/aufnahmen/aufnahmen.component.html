@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-md-4">
-                <pagination [items]="aufnahmen " [page-size]="pageSize" (page-changed)="onPageChanged($event)" (page-reset)="onReset()"></pagination>
+                <pagination [items]="aufnahmen " [page-size]="this.param.pageSize" (page-changed)="onPageChanged($event)" (page-reset)="onReset()"></pagination>
             </div>
 
         </div>

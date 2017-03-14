@@ -31,11 +31,18 @@ export class AufnahmenComponent implements OnInit {
     aufnahmenLoading;
     pagedAufnahmen = [];
     currentAufnahme;
-    pageSize = 10;
+    // pageSize = 10;
     currentpage;
     oldpagesize = 10;
     categories = [];
-    
+    param = {
+        query: null,
+        category: null,
+        sort: "date-reverse",
+        pageSize: 10,
+        page: 1 
+    };
+
     constructor(
         private _vdrService: VdrService ) { 
 	}
@@ -44,18 +51,34 @@ export class AufnahmenComponent implements OnInit {
         this.loadAufnahmen();
         this.loadCategories();
 	}
-    
-    private loadAufnahmen(query?, category?){
+
+
+
+    //private loadAufnahmen(query?, category?){
+    private loadAufnahmen(){
+
         this.aufnahmenLoading = true;
         //console.log(filter, category);
-        this.pageSize = this.calcPageSize();
-        let sort = "date-reverse"
-        this._vdrService.getRecordings(query, category, sort)
-            .subscribe(
-                aufnahmen => {
+        // this.pageSize = this.calcPageSize();
+        // let sort = "date-reverse"
+        // this._vdrService.getRecordings(query, category, sort)
+        //     .subscribe(
+        //         aufnahmen => {
+        //             this.aufnahmen = aufnahmen.recordings;
+        //             // console.log(this.aufnahmen)
+        //             this.pagedAufnahmen = _.take(this.aufnahmen, this.pageSize);
+        //         },
+        //         null,
+        //         () => { this.aufnahmenLoading = false; });
+
+        this.param.pageSize = this.calcPageSize();
+
+        this._vdrService.getRecordings_p(this.param).subscribe(
+            aufnahmen => {
                     this.aufnahmen = aufnahmen.recordings;
-                    // console.log(this.aufnahmen)
-                    this.pagedAufnahmen = _.take(this.aufnahmen, this.pageSize);
+                    // console.log(this.pagedAufnahmen)
+                    // this.pagedAufnahmen = this.aufnahmen;
+                    this.pagedAufnahmen = _.take(this.aufnahmen, this.param.pageSize);
                 },
                 null,
                 () => { this.aufnahmenLoading = false; });
@@ -63,18 +86,24 @@ export class AufnahmenComponent implements OnInit {
 
     reloadAufnahmen(){
         this.currentAufnahme = null;
-        this.loadAufnahmen(this._vdrService._filter, this._vdrService._category);
+        this.loadAufnahmen();
+        // this.loadAufnahmen(this._vdrService._filter, this._vdrService._category);
     }
 
     reloadAufnahmenFilter(filter){
-        this._vdrService._filter = filter;
+        this.param.query = (filter) ? filter : null;
         this.reloadAufnahmen();
     }
 
     reloadAufnahmenCategory(category){
-        this._vdrService._category = category;
+        this.param.category = (category) ? category : null;
         this.reloadAufnahmen();
     }
+
+    // loadCategoriesClick() {
+    //     console.log("cat click")
+    //     // _.debounce(function() { this.loadCategories() }, 100)
+    // }
 
     loadCategories() {
         this._vdrService.getRecordingsCategories()
@@ -89,21 +118,23 @@ export class AufnahmenComponent implements OnInit {
 
 	onPageChanged(page) {
         this.currentpage = page;
-        var startIndex = (page - 1) * this.pageSize;
-        this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.pageSize);
+        this.param.page = page;
+        var startIndex = (page - 1) * this.param.pageSize;
+        this.pagedAufnahmen = _.take(_.rest(this.aufnahmen, startIndex), this.param.pageSize);
+        // this.reloadAufnahmen()
 	}
 
     onReset() {
-        this._vdrService._filter = null;
-        this._vdrService._category = null;
+        this.param.query = null;
+        this.param.category = null;
         this.reloadAufnahmen();
     }
 
     onResize($event) {
-        this.pageSize = this.calcPageSize();
-        if (this.oldpagesize != this.pageSize) {
+        this.param.pageSize = this.calcPageSize();
+        if (this.oldpagesize != this.param.pageSize) {
             this.reloadAufnahmen();
-            this.oldpagesize = this.pageSize
+            this.oldpagesize = this.param.pageSize
         }
     }
 

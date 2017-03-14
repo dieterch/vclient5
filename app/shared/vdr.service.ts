@@ -8,11 +8,11 @@ import * as _ from 'underscore';
 @Injectable()
 export class VdrService implements OnInit {
 	private _vdrurl = "http://192.168.11.8";
-	private _restproxyurl = this._vdrurl + ":8080";
-	// private _restproxyurl = "http://localhost:8080";
+	// private _restproxyurl = this._vdrurl + ":8080";
+	private _restproxyurl = "http://localhost:8080";
 	private _resturl = this._vdrurl + ":8002";
-    _filter = null;
-    _category = null;
+    // _filter = null;
+    // _category = null;
     private _keys = {
          "Up" : this._resturl + "/remote/Up",
          "Down" : this._resturl + "/remote/Down",
@@ -74,6 +74,12 @@ export class VdrService implements OnInit {
 			.map(res => {
 				return res.json().categories;
 			});	
+	}
+
+	getRecordings_p(aparam) {
+		let url = this._restproxyurl+ "/aufnahmen";
+		return this._http.post(url, aparam)
+			.map(res => res.json());		
 	}
 
 	getRecordings(query?, category?, sort?) {
