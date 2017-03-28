@@ -75,7 +75,7 @@ export class AufnahmeComponent {
     }
 
     showdialog(rec) {
-      // console.log(rec);
+      console.log(rec);
       this._router.navigate(['aufnahmen', rec.number]);
     }
 

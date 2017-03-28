@@ -16,7 +16,6 @@ import { VdrService }           from '../shared/vdr.service';
 // import { UserService }          from '../users/user.service';
 import { PreventUnsavedChangesGuard } from '../prevent-unsaved-changes-guard.service';
 
-
 @NgModule({
     imports: [
         CommonModule,

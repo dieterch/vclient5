@@ -71,12 +71,12 @@ export class AufnahmeFormComponent implements OnInit {
         var id = this._route.params.subscribe(params => {
             
             var id = +params["id"];
-
+            console.log(id);  
             this.title = id ? "Edit User" : "New User";
             
             if (!id)
                 return;
-                
+  
             this._vdrService.getRecording(id)
                 .subscribe(
                     record => {
